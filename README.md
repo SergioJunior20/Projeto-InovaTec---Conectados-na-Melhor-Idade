@@ -18,7 +18,11 @@ O **Conectados na Melhor Idade** é um projeto dedicado à inclusão digital de 
 - Acompanhar o progresso dos participantes com atividades e registro de presença.
 
 ---
+### Protótipo
 
+- [Figma](https://www.figma.com/design/euUdvsvcAL3uGl22NPmRjs/Prototipo?m=auto&t=0Jh0PfjvpJQZvYV2-1)
+
+---
 ## 🧩 Estrutura Pedagógica
 
 O curso é dividido em módulos progressivos, com exercícios práticos e acompanhamento individualizado.
