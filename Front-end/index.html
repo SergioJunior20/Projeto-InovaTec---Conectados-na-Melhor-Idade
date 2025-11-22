@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conectado na Melhor Idade</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Tela de Boas-Vindas -->
+        <div id="welcomeScreen" class="screen active">
+            <div class="screen-content">
+                <div class="logo">
+                    <div class="logo-icon">👵📱</div>
+                    <h1>Conectado na Melhor Idade</h1>
+                </div>
+                <p class="subtitle">Tecnologia com paciência e carinho</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Letras Grandes</h3>
+                        <p>Texto fácil de ler e entender</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Área Segura</h3>
+                        <p>Pratique sem medo de errar</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">👥</div>
+                        <h3>Apoio Familiar</h3>
+                        <p>Familiares podem ajudar</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Seu Ritmo</h3>
+                        <p>Aprenda no seu tempo</p>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="showScreen('nameScreen')">COMECAR</button>
+            </div>
+        </div>
+
+        <!-- Tela de Cadastro do Nome -->
+        <div id="nameScreen" class="screen">
+            <div class="screen-content">
+                <div class="logo">
+                    <div class="logo-icon">👤</div>
+                    <h2>Seja bem-vindo!</h2>
+                </div>
+                <p>Agora você vai responder algumas questões para nos conhecermos melhor</p>
+                <p>Mas antes, digite seu nome:</p>
+                
+                <div class="form-group">
+                    <input type="text" id="userName" placeholder="Seu nome completo">
+                </div>
+                
+                <button class="btn btn-primary" onclick="saveName()">VAMOS COMEÇAR</button>
+            </div>
+        </div>
+
+        <!-- Tela do Questionário -->
+        <div id="quizScreen" class="screen">
+            <div class="screen-content">
+                <div class="logo">
+                    <h2>Questionário</h2>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-text">Pergunta <span id="currentQuestion">1</span> de 5</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 20%"></div>
+                    </div>
+                </div>
+                
+                <h3 id="questionText">O quanto você se sente à vontade em mexer em um celular?</h3>
+                
+                <div class="options-container" id="optionsContainer">
+                    <div class="option" onclick="selectOption(this, 0)">Nunca usei - Sou iniciante total</div>
+                    <div class="option" onclick="selectOption(this, 1)">Uso pouco - Só atendo chamadas</div>
+                    <div class="option" onclick="selectOption(this, 2)">Uso bem - Consigo mandar mensagens</div>
+                    <div class="option" onclick="selectOption(this, 3)">Uso bastante - Fotos, redes sociais e mais</div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()">Voltar</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Próxima Pergunta</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Resultado -->
+        <div id="resultScreen" class="screen">
+            <div class="screen-content">
+                <div class="logo">
+                    <div class="logo-icon">🎉</div>
+                    <h2>Cadastro Concluído!</h2>
+                </div>
+                
+                <div class="result-container">
+                    <p>Parabéns, <span id="userNameDisplay"></span>!</p>
+                    <div class="result-score" id="userScore">0/5</div>
+                    <p id="resultMessage">Vamos personalizar sua experiência de aprendizado!</p>
+                </div>
+                
+                <button class="btn btn-primary" onclick="startApp()">Começar a Aprender!</button>
+            </div>
+        </div>
+
+        <!-- Tela do Aplicativo Principal -->
+        <div id="appScreen" class="screen">
+            <div class="app-header">
+                <div class="header-content">
+                    <div class="logo-small">
+                        <div class="logo-icon-small">👵📱</div>
+                        <h1>Conectado na Melhor Idade</h1>
+                    </div>
+                    <div class="user-info">
+                        <div class="user-greeting-container">
+                            <p class="user-greeting" id="userGreeting">Olá! Seu nível: Iniciante Total</p>
+                            <div class="header-buttons">
+                                <button class="header-btn" onclick="showHelp()">Ajuda</button>
+                                <button class="header-btn" onclick="restartQuiz()">Refazer Quiz</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="main-nav">
+                <button class="nav-btn active" onclick="showAppSection('aprender')">Aprender</button>
+                <button class="nav-btn" onclick="showAppSection('pix')">Fazer PIX</button>
+                <button class="nav-btn" onclick="showAppSection('seguranca')">Segurança</button>
+                <button class="nav-btn" onclick="showAppSection('praticar')">Praticar</button>
+                <button class="nav-btn" onclick="showAppSection('sugestoes')">Sugestões</button>
+            </div>
+            
+            <div class="app-content">
+                <!-- Seção Aprender -->
+                <div id="aprender" class="app-section active">
+                    <h2 class="section-title">O que você quer aprender hoje?</h2>
+                    
+                    <div class="learning-cards">
+                        <div class="learning-card" onclick="startTutorial('whatsapp')">
+                            <div class="card-content">
+                                <div class="card-header">
+                                    <div class="card-icon">💬</div>
+                                    <div class="card-text-content">
+                                        <h3 class="card-title">WhatsApp</h3>
+                                        <span class="difficulty difficulty-easy">Fácil</span>
+                                    </div>
+                                </div>
+                                <p class="card-description">Aprenda a mandar mensagens, fotos e fazer chamadas para sua família</p>
+                            </div>
+                        </div>
+                        
+                        <div class="learning-card" onclick="startTutorial('fotos')">
+                            <div class="card-content">
+                                <div class="card-header">
+                                    <div class="card-icon">📸</div>
+                                    <div class="card-text-content">
+                                        <h3 class="card-title">Tirar e Enviar Fotos</h3>
+                                        <span class="difficulty difficulty-easy">Fácil</span>
+                                    </div>
+                                </div>
+                                <p class="card-description">Guarde suas memórias e compartilhe com quem você ama</p>
+                            </div>
+                        </div>
+                        
+                        <div class="learning-card" onclick="startTutorial('videochamada')">
+                            <div class="card-content">
+                                <div class="card-header">
+                                    <div class="card-icon">📹</div>
+                                    <div class="card-text-content">
+                                        <h3 class="card-title">Videochamadas</h3>
+                                        <span class="difficulty difficulty-medium">Médio</span>
+                                    </div>
+                                </div>
+                                <p class="card-description">Veja seus netos e filhos mesmo longe - é como estar junto!</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Área de Treino Seguro -->
+                    <div class="safe-training">
+                        <div class="safe-training-content">
+                            <div class="safe-training-header">
+                                <div class="safe-training-icon">■</div>
+                                <h3>Área de Treino Seguro</h3>
+                            </div>
+                            <p>Pratique aqui sem medo de errar. Nada de verdade será alterado no seu celular!</p>
+                            <button class="btn training-btn" onclick="startTraining()">Começar Treino Seguro</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seção PIX -->
+                <div id="pix" class="app-section">
+                    <h2 class="section-title">Aprenda a Fazer PIX</h2>
+                    
+                    <div class="tutorial-container">
+                        <h3>💰 Transferências com PIX</h3>
+                        <p>Rápido, seguro e sem custos</p>
+                        
+                        <div class="tutorial-display" id="pixDisplay">
+                            <!-- Conteúdo do tutorial será injetado aqui -->
+                        </div>
+                        
+                        <div class="tutorial-step" id="pixStep">
+                            Abra o aplicativo do seu banco no celular
+                        </div>
+                        
+                        <div class="tutorial-controls">
+                            <button class="btn btn-secondary" onclick="previousPixStep()">Voltar</button>
+                            <button class="btn btn-primary" onclick="nextPixStep()">Próximo</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seção Segurança -->
+                <div id="seguranca" class="app-section">
+                    <h2 class="section-title">Dicas de Segurança Digital</h2>
+                    
+                    <div class="learning-cards">
+                        <div class="learning-card">
+                            <div class="card-content">
+                                <div class="card-header">
+                                    <div class="card-icon">🔐</div>
+                                    <div class="card-text-content">
+                                        <h3 class="card-title">Senhas Seguras</h3>
+                                    </div>
+                                </div>
+                                <p class="card-description">Use senhas diferentes para cada aplicativo. Anote em um local seguro.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="learning-card">
+                            <div class="card-content">
+                                <div class="card-header">
+                                    <div class="card-icon">📞</div>
+                                    <div class="card-text-content">
+                                        <h3 class="card-title">Ligações Suspeitas</h3>
+                                    </div>
+                                </div>
+                                <p class="card-description">Desconfie de ligações pedindo dados pessoais ou PIX. Seu banco nunca pede senha por telefone.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="learning-card">
+                            <div class="card-content">
+                                <div class="card-header">
+                                    <div class="card-icon">📱</div>
+                                    <div class="card-text-content">
+                                        <h3 class="card-title">Aplicativos Falsos</h3>
+                                    </div>
+                                </div>
+                                <p class="card-description">Só baixe aplicativos da loja oficial do seu celular (Play Store ou App Store).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seção Praticar -->
+                <div id="praticar" class="app-section">
+                    <h2 class="section-title">Treine sem pressão</h2>
+                    <p class="section-subtitle">Aqui você pode praticar quantas vezes quiser. Errar é normal!</p>
+                    
+                    <div class="learning-cards">
+                        <div class="learning-card" onclick="startPractice('icones')">
+                            <div class="card-content">
+                                <div class="card-header">
+                                    <div class="card-icon">🔍</div>
+                                    <div class="card-text-content">
+                                        <h3 class="card-title">Encontre o Ícone</h3>
+                                    </div>
+                                </div>
+                                <p class="card-description">Pratique encontrar os aplicativos na tela do seu celular</p>
+                            </div>
+                        </div>
+                        
+                        <div class="learning-card" onclick="startPractice('arrastar')">
+                            <div class="card-content">
+                                <div class="card-header">
+                                    <div class="card-icon">👆</div>
+                                    <div class="card-text-content">
+                                        <h3 class="card-title">Arraste e Solte</h3>
+                                    </div>
+                                </div>
+                                <p class="card-description">Aprenda os gestos básicos para usar o celular</p>
+                            </div>
+                        </div>
+                        
+                        <div class="learning-card" onclick="startPractice('quiz')">
+                            <div class="card-content">
+                                <div class="card-header">
+                                    <div class="card-icon">❓</div>
+                                    <div class="card-text-content">
+                                        <h3 class="card-title">Perguntas e Respostas</h3>
+                                    </div>
+                                </div>
+                                <p class="card-description">Teste seus conhecimentos sobre tecnologia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seção Sugestões -->
+                <div id="sugestoes" class="app-section">
+                    <h2 class="section-title">Sugestões e Feedback</h2>
+                    <p class="section-subtitle">Sua opinião é muito importante para melhorarmos o aplicativo</p>
+                    
+                    <div class="suggestion-form">
+                        <div class="form-group">
+                            <label for="suggestionText">Conte-nos sua sugestão:</label>
+                            <textarea id="suggestionText" placeholder="O que podemos melhorar? Que funcionalidade você gostaria de ver?"></textarea>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="submitSuggestion()">Enviar Sugestão</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="help-button" onclick="activateHelp()">🆘</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
